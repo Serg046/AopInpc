@@ -17,13 +17,31 @@ public class ViewModel : INotifyPropertyChangedCaller
 }
 ```
 ## Usage:
+- AopInpcFactory
 ```csharp
 static void Main(string[] args)
 {
-    ViewModel injectedViewModel = AopInpc.AopInpc.Create<ViewModel>();
-    injectedViewModel.PropertyChanged += (sender, eventArgs)
-        => Console.WriteLine($"The property \"{eventArgs.PropertyName}\" was updated with value \"{injectedViewModel.Property}\".");
-    injectedViewModel.Property = "Hello world!";
+    var viewModel = AopInpcFactory.Create<ViewModel>();
+    viewModel.PropertyChanged += (sender, eventArgs)
+        => Console.WriteLine($"The property \"{eventArgs.PropertyName}\" was updated with value \"{viewModel.Property}\".");
+    viewModel.Property = "Hello world!";
+}
+```
+- DI-container
+```csharp
+static void Main(string[] args)
+{
+    var containerBuilder = new ContainerBuilder();
+    containerBuilder.RegisterType<InpcInterceptor>();
+    containerBuilder.RegisterType<ViewModel>()
+        .EnableClassInterceptors()
+        .InterceptedBy(typeof(InpcInterceptor));
+    var container = containerBuilder.Build();
+
+    var viewModel = container.Resolve<ViewModel>();
+    viewModel.PropertyChanged += (sender, eventArgs)
+        => Console.WriteLine($"The property \"{eventArgs.PropertyName}\" was updated with value \"{viewModel.Property}\".");
+    viewModel.Property = "Hello world!";
 }
 ```
 ## Output:
