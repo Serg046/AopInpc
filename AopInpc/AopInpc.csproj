@@ -42,10 +42,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AopInpc.cs" />
+    <Compile Include="AopInpcFactory.cs" />
     <Compile Include="InjectInpc.cs" />
     <Compile Include="INotifyPropertyChangedCaller.cs" />
-    <Compile Include="Interceptor.cs" />
+    <Compile Include="InpcInterceptor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

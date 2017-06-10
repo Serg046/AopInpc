@@ -4,12 +4,12 @@ using Xunit;
 
 namespace AopInpc.Tests
 {
-    public class AopInpcTests
+    public class AopInpcFactoryTests
     {
         [Fact]
         public void Create_PropWithoutInjectInpc_InpcCallIsNotInjected()
         {
-            var injectedVm = AopInpc.Create<ViewModel>();
+            var injectedVm = AopInpcFactory.Create<ViewModel>();
             injectedVm.PropertyChanged += (sender, args) => throw new InvalidOperationException(args.PropertyName);
 
             injectedVm.Prop = 5;
@@ -18,7 +18,7 @@ namespace AopInpc.Tests
         [Fact]
         public void Create_PropWithInjectInpc_InpcCallInjected()
         {
-            var injectedVm = AopInpc.Create<ViewModel>();
+            var injectedVm = AopInpcFactory.Create<ViewModel>();
             injectedVm.PropertyChanged += (sender, args) => throw new InvalidOperationException(args.PropertyName);
 
             var ex = Assert.Throws<InvalidOperationException>(() => injectedVm.InjectProp = 5);
@@ -28,7 +28,7 @@ namespace AopInpc.Tests
         [Fact]
         public void Create_NullAsEmptyCtorArgument_InpcCallInjected()
         {
-            var injectedVm = AopInpc.Create<ViewModel>(null);
+            var injectedVm = AopInpcFactory.Create<ViewModel>(null);
             injectedVm.PropertyChanged += (sender, args) => throw new InvalidOperationException(args.PropertyName);
 
             var ex = Assert.Throws<InvalidOperationException>(() => injectedVm.InjectProp = 5);
@@ -38,7 +38,7 @@ namespace AopInpc.Tests
         [Fact]
         public void Create_CtorWithArguments_InpcCallInjected()
         {
-            var injectedVm = AopInpc.Create<ViewModel>(7);
+            var injectedVm = AopInpcFactory.Create<ViewModel>(7);
             injectedVm.PropertyChanged += (sender, args) => throw new InvalidOperationException(args.PropertyName);
 
             Assert.Equal(7, injectedVm.Prop);
@@ -49,10 +49,10 @@ namespace AopInpc.Tests
         [Fact]
         public void Validate_IncorrectVewModel_Fails()
         {
-            Assert.True(AopInpc.Validate(typeof(ViewModel)));
-            Assert.False(AopInpc.Validate(typeof(NonVirtualPropViewModel)));
-            Assert.False(AopInpc.Validate(typeof(NonPublicPropGetterViewModel)));
-            Assert.False(AopInpc.Validate(typeof(NonPublicPropSetterViewModel)));
+            Assert.True(AopInpcFactory.Validate(typeof(ViewModel)));
+            Assert.False(AopInpcFactory.Validate(typeof(NonVirtualPropViewModel)));
+            Assert.False(AopInpcFactory.Validate(typeof(NonPublicPropGetterViewModel)));
+            Assert.False(AopInpcFactory.Validate(typeof(NonPublicPropSetterViewModel)));
         }
 
         public class BaseViewModel : INotifyPropertyChangedCaller

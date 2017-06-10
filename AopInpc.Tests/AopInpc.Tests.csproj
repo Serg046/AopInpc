@@ -63,8 +63,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AopInpcTests.cs" />
-    <Compile Include="InterceptorTests.cs" />
+    <Compile Include="AopInpcFactoryTests.cs" />
+    <Compile Include="InpcInterceptorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

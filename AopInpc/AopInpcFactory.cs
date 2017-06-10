@@ -4,13 +4,13 @@ using Castle.DynamicProxy;
 
 namespace AopInpc
 {
-    public static class AopInpc
+    public static class AopInpcFactory
     {
         public static T Create<T>(params object[] args) where T : class, INotifyPropertyChangedCaller
         {
             var inpcType = typeof(T);
             Debug.Assert(Validate(inpcType), "All injected properties must be public virtual read/write allowed");
-            return (T)new ProxyGenerator().CreateClassProxy(inpcType, args, new Interceptor());
+            return (T)new ProxyGenerator().CreateClassProxy(inpcType, args, new InpcInterceptor());
         }
 
         internal static bool Validate(Type inpcType)

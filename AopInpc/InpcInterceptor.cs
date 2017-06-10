@@ -2,7 +2,7 @@
 
 namespace AopInpc
 {
-    internal class Interceptor : IInterceptor
+    public class InpcInterceptor : IInterceptor
     {
         public void Intercept(IInvocation invocation)
         {

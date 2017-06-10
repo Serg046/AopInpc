@@ -5,9 +5,9 @@ using Xunit;
 
 namespace AopInpc.Tests
 {
-    public class InterceptorTests
+    public class InpcInterceptorTests
     {
-        private readonly Interceptor _interceptor = new Interceptor();
+        private readonly InpcInterceptor _interceptor = new InpcInterceptor();
 
         private Mock<IInvocation> GetInvocationMock(Type type)
         {
