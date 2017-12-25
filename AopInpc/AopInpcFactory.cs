@@ -13,11 +13,22 @@ namespace AopInpc
             return (T)new ProxyGenerator().CreateClassProxy(inpcType, args, new InpcInterceptor());
         }
 
+        public static T Decorate<T>(T target) where T : class, INotifyPropertyChangedCaller
+        {
+            if (target == null)
+            {
+                throw new ArgumentNullException(nameof(target));
+            }
+            var inpcType = typeof(T);
+            Debug.Assert(Validate(inpcType), "All injected properties must be public virtual read/write allowed");
+            return (T)new ProxyGenerator().CreateClassProxyWithTarget(inpcType, target, new InpcInterceptor());
+        }
+
         internal static bool Validate(Type inpcType)
         {
             foreach (var prop in inpcType.GetProperties())
             {
-                if (prop.IsDefined(typeof(InjectInpcAttribute), true) && !(prop.GetGetMethod()?.IsVirtual == true && prop.GetSetMethod()?.IsVirtual == true))
+                if (prop.IsDefined(typeof(InpcAttribute), true) && !(prop.GetGetMethod()?.IsVirtual == true && prop.GetSetMethod()?.IsVirtual == true))
                 {
                     return false;
                 }

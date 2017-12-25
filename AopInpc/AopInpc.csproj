@@ -43,7 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AopInpcFactory.cs" />
-    <Compile Include="InjectInpc.cs" />
+    <Compile Include="InpcAttribute.cs" />
     <Compile Include="INotifyPropertyChangedCaller.cs" />
     <Compile Include="InpcInterceptor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

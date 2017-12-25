@@ -6,7 +6,7 @@
         <title>AopInpc</title>
         <authors>Serg046</authors>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
-        <description>Castle.DynamicProxy based library which provides ability to implement INotifyPropertyChanged interface automatically using AOP style.</description>
+        <description>Castle.DynamicProxy based library that provides a way to implement INotifyPropertyChanged automatically using AOP style.</description>
         <projectUrl>https://github.com/Serg046/AopInpc</projectUrl>
         <dependencies>
             <dependency id="Castle.Core" version="4.0.0"/>

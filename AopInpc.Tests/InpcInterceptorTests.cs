@@ -49,7 +49,7 @@ namespace AopInpc.Tests
 
         private class BaseViewModel
         {
-            [InjectInpc]
+            [Inpc]
             public int Prop { get; set; }
         }
     }

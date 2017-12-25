@@ -7,7 +7,7 @@ namespace AopInpc.Tests
     public class AopInpcFactoryTests
     {
         [Fact]
-        public void Create_PropWithoutInjectInpc_InpcCallIsNotInjected()
+        public void Create_PropWithoutInpcAttribute_InpcCallIsNotInjected()
         {
             var injectedVm = AopInpcFactory.Create<ViewModel>();
             injectedVm.PropertyChanged += (sender, args) => throw new InvalidOperationException(args.PropertyName);
@@ -16,7 +16,7 @@ namespace AopInpc.Tests
         }
 
         [Fact]
-        public void Create_PropWithInjectInpc_InpcCallInjected()
+        public void Create_PropWithInpcAttribute_InpcCallInjected()
         {
             var injectedVm = AopInpcFactory.Create<ViewModel>();
             injectedVm.PropertyChanged += (sender, args) => throw new InvalidOperationException(args.PropertyName);
@@ -55,6 +55,32 @@ namespace AopInpc.Tests
             Assert.False(AopInpcFactory.Validate(typeof(NonPublicPropSetterViewModel)));
         }
 
+        [Fact]
+        public void Decorate_PropWithoutInpcAttribute_InpcCallIsNotInjected()
+        {
+            var injectedVm = AopInpcFactory.Decorate(new ViewModel());
+            injectedVm.PropertyChanged += (sender, args) => throw new InvalidOperationException(args.PropertyName);
+
+            injectedVm.Prop = 5;
+        }
+
+        [Fact]
+        public void Decorate_PropWithInpcAttribute_InpcCallInjected()
+        {
+            var injectedVm = AopInpcFactory.Decorate(new ViewModel());
+            injectedVm.PropertyChanged += (sender, args) => throw new InvalidOperationException(args.PropertyName);
+
+            var ex = Assert.Throws<InvalidOperationException>(() => injectedVm.InjectProp = 5);
+            Assert.Equal(nameof(ViewModel.InjectProp), ex.Message);
+        }
+
+        [Fact]
+        public void Decorate_NullAsTarget_Fails()
+        {
+            ViewModel viewModel = null;
+            Assert.Throws<ArgumentNullException>(() => AopInpcFactory.Decorate(viewModel));
+        }
+
         public class BaseViewModel : INotifyPropertyChangedCaller
         {
             public event PropertyChangedEventHandler PropertyChanged;
@@ -75,25 +101,25 @@ namespace AopInpc.Tests
 
             public virtual int Prop { get; set; }
 
-            [InjectInpc]
+            [Inpc]
             public virtual int InjectProp { get; set; }
         }
 
         public class NonVirtualPropViewModel : BaseViewModel
         {
-            [InjectInpc]
+            [Inpc]
             public int Prop { get; set; }
         }
 
         public class NonPublicPropGetterViewModel : BaseViewModel
         {
-            [InjectInpc]
+            [Inpc]
             public virtual int Prop { internal get; set; }
         }
 
         public class NonPublicPropSetterViewModel : BaseViewModel
         {
-            [InjectInpc]
+            [Inpc]
             public virtual int Prop { get; internal set; }
         }
     }

@@ -13,7 +13,7 @@ namespace AopInpc
                 var propertyName = invocation.Method.Name.Substring(4);
                 var propertyInfo = invocation.TargetType.GetProperty(propertyName);
 
-                if (propertyInfo.IsDefined(typeof(InjectInpcAttribute), false))
+                if (propertyInfo.IsDefined(typeof(InpcAttribute), false))
                 {
                     var proxy = invocation.Proxy as INotifyPropertyChangedCaller;
                     proxy.RaisePropertyChanged(propertyName);
