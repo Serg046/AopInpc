@@ -45,5 +45,15 @@ static void Main(string[] args)
     viewModel.Property = "Hello world!";
 }
 ```
+- Castle.DynamicProxy ProxyGenerator
+```csharp
+static void Main(string[] args)
+{
+    var viewModel = new ProxyGenerator().CreateClassProxy<ViewModel>(new InpcInterceptor());
+    viewModel.PropertyChanged += (sender, eventArgs)
+        => Console.WriteLine($"The property \"{eventArgs.PropertyName}\" was updated with value \"{viewModel.Property}\".");
+    viewModel.Property = "Hello world!";
+}
+```
 ## Output:
 > The property "Property" was updated with value "Hello world!".
