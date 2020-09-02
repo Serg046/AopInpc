@@ -9,9 +9,9 @@ namespace AopInpc.Tests
     {
         private readonly InpcInterceptor _interceptor = new InpcInterceptor();
 
-        private Mock<IInvocation> GetInvocationMock(Type type)
+        private Mock<Castle.DynamicProxy.IInvocation> GetInvocationMock(Type type)
         {
-            var invocationMock = new Mock<IInvocation>();
+            var invocationMock = new Mock<Castle.DynamicProxy.IInvocation>();
             invocationMock.SetupGet(m => m.Method).Returns(type.GetProperty(nameof(BaseViewModel.Prop)).SetMethod);
             invocationMock.SetupGet(m => m.TargetType).Returns(type);
             return invocationMock;
