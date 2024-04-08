@@ -1,18 +1,19 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net462</TargetFramework>
-    <Version>1.0.3.1</Version>
-    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
-    <GenerateAssemblyDescriptionAttribute>false</GenerateAssemblyDescriptionAttribute>
-    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
-    <GenerateAssemblyTitleAttribute>false</GenerateAssemblyTitleAttribute>
-    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
-    <GenerateAssemblyVersionAttribute>false</GenerateAssemblyVersionAttribute>
-    <GenerateAssemblyFileVersionAttribute>false</GenerateAssemblyFileVersionAttribute>
+    <TargetFramework>net4</TargetFramework>
+    <PackageId>AopInpc</PackageId>
+    <Title>AopInpc</Title>
+    <Description>Castle.DynamicProxy based library that provides a way to implement INotifyPropertyChanged automatically using AOP style.<Description/>
+    <Version>1.0.3.2</Version>
+    <Authors>Sergey Aseev (Serg046)</Authors>
+    <PackageProjectUrl>https://github.com/Serg046/AopInpc</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Serg046/AopInpc</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>AopInpc INPC INotifyPropertyChanged</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Castle.Core" Version="5.0.0" />
+    <PackageReference Include="Castle.Core" Version="4.0.0" />
   </ItemGroup>
 
 </Project>
