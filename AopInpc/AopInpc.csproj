@@ -14,5 +14,5 @@
   <ItemGroup>
     <PackageReference Include="Castle.Core" Version="5.0.0" />
   </ItemGroup>
-
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
