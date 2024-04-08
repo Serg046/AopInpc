@@ -3,7 +3,7 @@
     <TargetFramework>net4</TargetFramework>
     <PackageId>AopInpc</PackageId>
     <Title>AopInpc</Title>
-    <Description>Castle.DynamicProxy based library that provides a way to implement INotifyPropertyChanged automatically using AOP style.<Description/>
+	<Description>Castle.DynamicProxy based library that provides a way to implement INotifyPropertyChanged automatically using AOP style.</Description>
     <Version>1.0.3.2</Version>
     <Authors>Sergey Aseev (Serg046)</Authors>
     <PackageProjectUrl>https://github.com/Serg046/AopInpc</PackageProjectUrl>
